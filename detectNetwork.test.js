@@ -150,13 +150,16 @@ describe('Discover', function() {
     detectNetwork('6011567890123456789').should.equal('Discover');
   });
 
-  it('has a prefix of 644-649 and a length of 16', function() {
-    detectNetwork('644-649890123456').should.equal('Discover');
-  });
-
-  it('has a prefix of 644-649 and a length of 19', function() {
-    detectNetwork('644-649890123456789').should.equal('Discover');
-  });
+  for (var prefix = 644; prefix <= 649; prefix++) {
+    (function(prefix) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        detectNetwork(prefix + '4567890123456').should.equal('Discover');
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        detectNetwork(prefix + '4567890123456789').should.equal('Discover');
+      });
+    })(prefix)
+  }
   
   it('has a prefix of 65 and a length of 16', function() {
     detectNetwork('6534567890123456').should.equal('Discover');
@@ -170,139 +173,51 @@ describe('Discover', function() {
 
 describe('Maestro', function() {
   var should = chai.should();
+  var maestroPre = ['5018', '5020', '5038', '6304'];
 
-  //5018
-  it('has a prefix of 5018 and a length of 12', function() {
-    detectNetwork('501856789012').should.equal('Maestro');
-  });
+  for (var i = 0; i < maestroPre.length; i++) {
+    var mae12 = maestroPre[i] + '56789012';
+    var mae13 = maestroPre[i] + '567890123';
+    var mae14 = maestroPre[i] + '5678901234';
+    var mae15 = maestroPre[i] + '56789012345';
+    var mae16 = maestroPre[i] + '567890123456';
+    var mae17 = maestroPre[i] + '5678901234567';
+    var mae18 = maestroPre[i] + '56789012345678';
+    var mae19 = maestroPre[i] + '567890123456789';
 
-  it('has a prefix of 5018 and a length of 13', function() {
-    detectNetwork('5018567890123').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 12', function() {
+      detectNetwork(mae12).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 14', function() {
-    detectNetwork('50185678901234').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 13', function() {
+      detectNetwork(mae13).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 15', function() {
-    detectNetwork('501856789012345').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 14', function() {
+      detectNetwork(mae14).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 16', function() {
-    detectNetwork('5018567890123456').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 15', function() {
+      detectNetwork(mae15).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 17', function() {
-    detectNetwork('50185678901234567').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 16', function() {
+      detectNetwork(mae16).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 18', function() {
-    detectNetwork('501856789012345678').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 17', function() {
+      detectNetwork(mae17).should.equal('Maestro');
+    });
 
-  it('has a prefix of 5018 and a length of 19', function() {
-    detectNetwork('5018567890123456789').should.equal('Maestro');
-  });
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 18', function() {
+      detectNetwork(mae18).should.equal('Maestro');
+    });
 
-  //5020
-  it('has a prefix of 5020 and a length of 12', function() {
-    detectNetwork('502056789012').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 13', function() {
-    detectNetwork('5020567890123').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 14', function() {
-    detectNetwork('50205678901234').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 15', function() {
-    detectNetwork('502056789012345').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 16', function() {
-    detectNetwork('5020567890123456').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 17', function() {
-    detectNetwork('50205678901234567').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 18', function() {
-    detectNetwork('502056789012345678').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5020 and a length of 19', function() {
-    detectNetwork('5020567890123456789').should.equal('Maestro');
-  });
-
-  // 5038
-  it('has a prefix of 5038 and a length of 12', function() {
-    detectNetwork('503856789012').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 13', function() {
-    detectNetwork('5038567890123').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 14', function() {
-    detectNetwork('50385678901234').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 15', function() {
-    detectNetwork('503856789012345').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 16', function() {
-    detectNetwork('5038567890123456').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 17', function() {
-    detectNetwork('50385678901234567').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 18', function() {
-    detectNetwork('503856789012345678').should.equal('Maestro');
-  });
-
-  it('has a prefix of 5038 and a length of 19', function() {
-    detectNetwork('5038567890123456789').should.equal('Maestro');
-  });
-
-  // 6304
-  it('has a prefix of 6304 and a length of 12', function() {
-    detectNetwork('630456789012').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 13', function() {
-    detectNetwork('6304567890123').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 14', function() {
-    detectNetwork('63045678901234').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 15', function() {
-    detectNetwork('630456789012345').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 16', function() {
-    detectNetwork('6304567890123456').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 17', function() {
-    detectNetwork('63045678901234567').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 18', function() {
-    detectNetwork('630456789012345678').should.equal('Maestro');
-  });
-
-  it('has a prefix of 6304 and a length of 19', function() {
-    detectNetwork('6304567890123456789').should.equal('Maestro');
-  });
-
+    it('has a prefix of ' + maestroPre[i] + ' and a length of 19', function() {
+      detectNetwork(mae19).should.equal('Maestro');
+    });
+  };
+  
 });
 
 describe('should support China UnionPay')
