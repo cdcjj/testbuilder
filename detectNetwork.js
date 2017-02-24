@@ -9,20 +9,21 @@
 
 var detectNetwork = function(cardNumber) {
   var numArray = cardNumber.split('');
+  var twoPrefix = numArray[0] + numArray[1];
   if (numArray.length === 14){
-  	if (numArray[0] + numArray[1] === "39" || numArray[0] + numArray[1] === "38"){
+  	if (twoPrefix === "39" || twoPrefix === "38") {
   		return "Diner's Club";
   	}
   }else if (numArray.length === 15) {
-  	if (numArray[0] + numArray[1] === "34" || numArray[0] + numArray[1] === "37"){
+  	if (twoPrefix === "34" || twoPrefix === "37"){
   		return "American Express";
   	}
   }else if (numArray.length === 13 || 16 || 19){
   	if (numArray[0] === "4"){
   		return "Visa";
   	}else if (numArray.length === 16){ 
-  		if (numArray[0] + numArray[1] === "51" || "52" || "53" || "54" || "55") {
-  			return "Master Card";
+  		if (twoPrefix === "51" || "52" || "53" || "54" || "55") {
+  			return "MasterCard";
   		}
   	}
   }
