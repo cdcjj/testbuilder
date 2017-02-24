@@ -104,19 +104,19 @@ describe('MasterCard', function() {
   // Expect syntax is one way to do this, but there are others. 
   // If you want to know more, check out the documentation. 
   //   http://chaijs.com/api/bdd/
-  var expect = chai.expect;
+  // var expect = chai.expect;
  
-  it("has a prefix of 51 and a length of 16", function() {
-    expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
-  });
+  // it("has a prefix of 51 and a length of 16", function() {
+  //   expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+  // });
  
-  it("has a prefix of 52 and a length of 16", function() {
-    expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
-  });
+  // it("has a prefix of 52 and a length of 16", function() {
+  //   expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+  // });
  
-  it("has a prefix of 53 and a length of 16", function() {
-    expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
-  });
+  // it("has a prefix of 53 and a length of 16", function() {
+  //   expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+  // });
  
 
   // You can also use should instead of expect, which changes the style
@@ -127,6 +127,18 @@ describe('MasterCard', function() {
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
   var should = chai.should();
+
+  it("has a prefix of 51 and a length of 16", function() {
+    detectNetwork('5112345678901234').should.equal('MasterCard');
+  });
+ 
+  it("has a prefix of 52 and a length of 16", function() {
+    detectNetwork('5212345678901234').should.equal('MasterCard');
+  });
+ 
+  it("has a prefix of 53 and a length of 16", function() {
+    detectNetwork('5312345678901234').should.equal('MasterCard');
+  });
   
   it('has a prefix of 54 and a length of 16', function() {
     detectNetwork('5412345678901234').should.equal('MasterCard');
@@ -176,48 +188,49 @@ describe('Maestro', function() {
   var maestroPre = ['5018', '5020', '5038', '6304'];
 
   for (var i = 0; i < maestroPre.length; i++) {
-    var mae12 = maestroPre[i] + '56789012';
-    var mae13 = maestroPre[i] + '567890123';
-    var mae14 = maestroPre[i] + '5678901234';
-    var mae15 = maestroPre[i] + '56789012345';
-    var mae16 = maestroPre[i] + '567890123456';
-    var mae17 = maestroPre[i] + '5678901234567';
-    var mae18 = maestroPre[i] + '56789012345678';
-    var mae19 = maestroPre[i] + '567890123456789';
+    (function(i) {
+      var mae12 = maestroPre[i] + '56789012';
+      var mae13 = maestroPre[i] + '567890123';
+      var mae14 = maestroPre[i] + '5678901234';
+      var mae15 = maestroPre[i] + '56789012345';
+      var mae16 = maestroPre[i] + '567890123456';
+      var mae17 = maestroPre[i] + '5678901234567';
+      var mae18 = maestroPre[i] + '56789012345678';
+      var mae19 = maestroPre[i] + '567890123456789';
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 12', function() {
-      detectNetwork(mae12).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 12', function() {
+        detectNetwork(mae12).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 13', function() {
-      detectNetwork(mae13).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 13', function() {
+        detectNetwork(mae13).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 14', function() {
-      detectNetwork(mae14).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 14', function() {
+        detectNetwork(mae14).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 15', function() {
-      detectNetwork(mae15).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 15', function() {
+        detectNetwork(mae15).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 16', function() {
-      detectNetwork(mae16).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 16', function() {
+        detectNetwork(mae16).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 17', function() {
-      detectNetwork(mae17).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 17', function() {
+        detectNetwork(mae17).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 18', function() {
-      detectNetwork(mae18).should.equal('Maestro');
-    });
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 18', function() {
+        detectNetwork(mae18).should.equal('Maestro');
+      });
 
-    it('has a prefix of ' + maestroPre[i] + ' and a length of 19', function() {
-      detectNetwork(mae19).should.equal('Maestro');
-    });
-  };
-  
+      it('has a prefix of ' + maestroPre[i] + ' and a length of 19', function() {
+        detectNetwork(mae19).should.equal('Maestro');
+      });
+     })(i)
+  }
 });
 
 describe('should support China UnionPay')
