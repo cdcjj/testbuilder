@@ -9,21 +9,37 @@
 
 var detectNetwork = function(cardNumber) {
   var numArray = cardNumber.split('');
+  var arrLength = numArray.length;
   var twoPrefix = numArray[0] + numArray[1];
-  if (numArray.length === 14){
-  	if (twoPrefix === "39" || twoPrefix === "38") {
-  		return "Diner's Club";
-  	}
-  }else if (numArray.length === 15) {
-  	if (twoPrefix === "34" || twoPrefix === "37"){
-  		return "American Express";
-  	}
-  }else if (numArray.length === 13 || 16 || 19){
-  	if (numArray[0] === "4"){
-  		return "Visa";
-  	}else if (numArray.length === 16){ 
-  		if (twoPrefix === "51" || "52" || "53" || "54" || "55") {
-  			return "MasterCard";
+  var fourPrefix = twoPrefix + numArray[2] + numArray[3];
+  if ((arrLength >= 12) && (arrLength <= 19)){
+  	if (fourPrefix === "5018" || fourPrefix === "5020" || fourPrefix === "5038" 
+  		|| fourPrefix === "6304") {
+  		return "Maestro";
+  	} else if (arrLength === 14){
+  		if (twoPrefix === "39" || twoPrefix === "38") {
+  			return "Diner's Club";
+  		}
+  	}else if (arrLength === 15) {
+  		if (twoPrefix === "34" || twoPrefix === "37"){
+  			return "American Express";
+  		}
+  	}else if (arrLength === 13 || arrLength === 16 || arrLength === 19){
+  		if (numArray[0] === "4"){
+  			return "Visa";
+  		}else if (arrLength === 16){ 
+  			if (twoPrefix === "51" || twoPrefix === "52" || twoPrefix === "53" || 
+  				twoPrefix === "54" || twoPrefix === "55") {
+  					return "MasterCard";
+  			}else if ((fourPrefix === '6011') || (twoPrefix + numArray[2] === '644' ||
+  				'645' || '646' || '647' || '648' || '649') || twoPrefix === '65'){
+  					return "Discover";
+  			}
+  		}else if (arrLength === 19) {
+  			if ((fourPrefix=== '6011') || (twoPrefix + numArray[2] === '644' ||
+  				'645' || '646' || '647' || '648' || '649') || twoPrefix === '65'){
+  				return "Discover";
+  			}
   		}
   	}
   }
