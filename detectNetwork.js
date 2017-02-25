@@ -11,35 +11,48 @@ var detectNetwork = function(cardNumber) {
   var numArray = cardNumber.split('');
   var arrLength = numArray.length;
   var twoPrefix = numArray[0] + numArray[1];
-  var fourPrefix = twoPrefix + numArray[2] + numArray[3];
+  var threePrefix = twoPrefix + numArray[2];
+  threePrefix = Number.parseInt(threePrefix);
+  var fourPrefix = threePrefix + numArray[3];
+  var fourNum = Number.parseInt(fourPrefix);
+  var sixPrefix = fourPrefix + numArray[4] + numArray[5];
+  sixPrefix = Number.parseInt(sixPrefix);
+
+
   if ((arrLength >= 12) && (arrLength <= 19)){
   	if (fourPrefix === "5018" || fourPrefix === "5020" || fourPrefix === "5038" 
   		|| fourPrefix === "6304") {
   		return "Maestro";
-  	} else if (arrLength === 14){
+  	}else if (arrLength >= 16 && arrLength <= 19){
+  		if ((threePrefix >= 624 && threePrefix <= 626) || (fourNum >= 6282 && fourNum <= 6288) || (sixPrefix >= 622126 && sixPrefix <= 622935)) {
+  			return "China UnionPay";
+  		}else if (arrLength === 16 || 19){
+  			if (numArray[0] === '4'){
+  				return "Visa";
+  			}else if (arrLength === 16){ 
+	  			if (twoPrefix === "51" || twoPrefix === "52" || twoPrefix === "53" || 
+	  				twoPrefix === "54" || twoPrefix === "55") {
+	  					return "MasterCard";
+	  			}else if ((fourPrefix === '6011') || (threePrefix >= 644 && threePrefix <= 649) || twoPrefix === '65'){
+	  					return "Discover";
+	  			}
+	  		}else if (arrLength === 19) {
+	  			if ((fourPrefix=== '6011') || (threePrefix >= 644 && threePrefix <= 649) || twoPrefix === '65'){
+	  				return "Discover";
+	  			}
+  			}
+  		}
+  	}else if (arrLength === 13){
+  		if (numArray[0] === '4'){
+  			return "Visa";
+  		}
+  	}else if (arrLength === 14){
   		if (twoPrefix === "39" || twoPrefix === "38") {
   			return "Diner's Club";
   		}
   	}else if (arrLength === 15) {
   		if (twoPrefix === "34" || twoPrefix === "37"){
   			return "American Express";
-  		}
-  	}else if (arrLength === 13 || arrLength === 16 || arrLength === 19){
-  		if (numArray[0] === "4"){
-  			return "Visa";
-  		}else if (arrLength === 16){ 
-  			if (twoPrefix === "51" || twoPrefix === "52" || twoPrefix === "53" || 
-  				twoPrefix === "54" || twoPrefix === "55") {
-  					return "MasterCard";
-  			}else if ((fourPrefix === '6011') || (twoPrefix + numArray[2] === '644' ||
-  				'645' || '646' || '647' || '648' || '649') || twoPrefix === '65'){
-  					return "Discover";
-  			}
-  		}else if (arrLength === 19) {
-  			if ((fourPrefix=== '6011') || (twoPrefix + numArray[2] === '644' ||
-  				'645' || '646' || '647' || '648' || '649') || twoPrefix === '65'){
-  				return "Discover";
-  			}
   		}
   	}
   }
