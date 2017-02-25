@@ -20,37 +20,40 @@ var detectNetwork = function(cardNumber) {
 
 
   if ((arrLength >= 12) && (arrLength <= 19)){
-  	if (fourPrefix === "5018" || "5020" || "5038" || "6304") {
+  	if (fourPrefix === "5018" || fourPrefix === "5020" || fourPrefix === "5038" || fourPrefix === "6304") {
   		return "Maestro";
   	}else if (arrLength >= 16 && arrLength <= 19){
   		if ((threePrefix >= 624 && threePrefix <= 626) || (fourNum >= 6282 && fourNum <= 6288) || (sixPrefix >= 622126 && sixPrefix <= 622935)) {
   			return "China UnionPay";
-  		}else if (arrLength === 16 || 19){
+  		}else if (arrLength === 16 || arrLength === 19){
   			if (arrLength === 16){ 
-	  			if (twoPrefix === "51" || "52" || "53" || "54" || "55") {
+	  			if (twoPrefix === "51" || twoPrefix === "52" || twoPrefix === "53" || twoPrefix === "54" || twoPrefix === "55") {
 	  					return "MasterCard";
 	  			}else if ((fourPrefix === '6011') || (threePrefix >= 644 && threePrefix <= 649) || twoPrefix === '65'){
 	  					return "Discover";
-	  			}else if ((fourPrefix === "4903" || "4905" || "4911" || "4936"|| "6333" || "6759") || (sixPrefix === 564182 || 633110)){
+	  			}else if ((fourPrefix === "4903" || fourPrefix === "4905" || fourPrefix === "4911" || fourPrefix === "4936"|| 
+            fourPrefix === "6333" || fourPrefix === "6759") || (sixPrefix === 564182 || sixPrefix === 633110)){
   					return "Switch";
   				}else if (numArray[0] === '4'){
-	  				if (fourPrefix !== "4903" || "4905" || "4911" || "4936"){
+	  				if (fourPrefix !== "4903" || fourPrefix !== "4905" || fourPrefix !== "4911" || fourPrefix !== "4936"){
 	  					return "Visa";
 	  				}
 	  			}
 	  		}else if (arrLength === 19) {
-	  			if (numArray[0] === '4'){
-	  				if (fourNum !== 4903 || 4905 || 4911 || 4936){
-	  					return "Visa";
-	  				}
-	  			}else if ((fourPrefix=== '6011') || (threePrefix >= 644 && threePrefix <= 649) || twoPrefix === '65'){
+	  			if ((fourPrefix=== '6011') || (threePrefix >= 644 && threePrefix <= 649) || twoPrefix === '65'){
 	  				return "Discover";
-	  			}else if ((fourNum === 4903 || 4905 || 4911 || 4936 || 6333 || 6759) || (sixPrefix === 564182 || 633110)){
-  					return "Switch";
-  				}
+	  			}else if ((fourPrefix === "4903" || fourPrefix === "4905" || fourPrefix === "4911" || fourPrefix === "4936"|| 
+            fourPrefix === "6333" || fourPrefix === "6759") || (sixPrefix === 564182 || sixPrefix === 633110)){
+            return "Switch";
+          }else if (numArray[0] === '4'){
+            if (fourPrefix !== "4903" || fourPrefix !== "4905" || fourPrefix !== "4911" || fourPrefix !== "4936"){
+              return "Visa";
+            }
+          }
   			}
   		}else if (arrLength === 18){
-  			if ((fourPrefix === "4903" || "4905" || "4911" || "4936" || "6333" || "6759") || (sixPrefix === 564182 || 633110)){
+  			if ((fourNum === 4903 || fourNum === 4905 || fourNum === 4911 || fourNum === 4936 || fourNum === 6333 || 
+            fourNum === 6759) || (sixPrefix === 564182 || 633110)){
   				return "Switch";
   			}
   		}
@@ -75,6 +78,8 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
+
+// When there is time: try to put the Credit Cards (name, max/min, prefix, and length) in an Object and solve with that.
 
 console.log(detectNetwork);
 
