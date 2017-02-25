@@ -247,7 +247,7 @@ describe('should support China UnionPay', function() {
       });
 
       it('has a prefix of ' + prefix + ' and a length of 18', function() {
-        detectNetwork(prefix + '45678901234568').should.equal('China UnionPay');
+        detectNetwork(prefix + '456789012345678').should.equal('China UnionPay');
       });
 
 
@@ -268,7 +268,7 @@ describe('should support China UnionPay', function() {
       });
 
       it('has a prefix of ' + prefix + ' and a length of 18', function() {
-        detectNetwork(prefix + '5678901234568').should.equal('China UnionPay');
+        detectNetwork(prefix + '56789012345678').should.equal('China UnionPay');
       });
 
 
@@ -289,7 +289,7 @@ describe('should support China UnionPay', function() {
       });
 
       it('has a prefix of ' + prefix + ' and a length of 18', function() {
-        detectNetwork(prefix + '78901234568').should.equal('China UnionPay');
+        detectNetwork(prefix + '789012345678').should.equal('China UnionPay');
       });
 
 
@@ -300,4 +300,40 @@ describe('should support China UnionPay', function() {
   }
 });
 
-describe('should support Switch')
+describe('should support Switch', function() {
+  var should = chai.should();
+  var arrSwitch = ['4903', '4905', '4911', '4936', '6333', '6759'];
+  var sixSwitch = ['564182', '633110'];
+
+  for (var j = 0; j < arrSwitch.length; j++) {
+    (function(j) {
+      it ('has a prefix of ' + arrSwitch[j] + ' and a length of 16', function() {
+        detectNetwork(arrSwitch[j] + '567890123456').should.equal('Switch');      
+      });
+
+      it ('has a prefix of ' + arrSwitch[j] + ' and a length of 18', function() {
+        detectNetwork(arrSwitch[j] + '56789012345678').should.equal('Switch');      
+      });
+
+      it ('has a prefix of ' + arrSwitch[j] + ' and a length of 19', function() {
+        detectNetwork(arrSwitch[j] + '567890123456789').should.equal('Switch');      
+      });
+    })(j)
+  }
+
+  for (var k = 0; k < sixSwitch.length; k++) {
+    (function(k) {
+      it ('has a prefix of ' + sixSwitch[k] + ' and a length of 16', function() {
+        detectNetwork(sixSwitch[k] + '7890123456').should.equal('Switch');      
+      });
+
+      it ('has a prefix of ' + sixSwitch[k] + ' and a length of 18', function() {
+        detectNetwork(sixSwitch[k] + '789012345678').should.equal('Switch');      
+      });
+
+      it ('has a prefix of ' + sixSwitch[k] + ' and a length of 19', function() {
+        detectNetwork(sixSwitch[k] + '7890123456789').should.equal('Switch');      
+      });
+    })(k)
+  }
+});
